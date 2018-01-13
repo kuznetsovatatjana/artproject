@@ -49,7 +49,7 @@
 			echo "Kasutaja $id logis sisse";
 			$_SESSION["userId"] = $id;
 			$_SESSION["userEmail"] = $emailFromDb;
-			header("Location: homepage.php");
+			header("Location: main.php");
 		} else {
 			$notice = "Vale parool";
 			}	
