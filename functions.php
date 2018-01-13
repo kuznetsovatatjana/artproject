@@ -24,6 +24,42 @@
 		$mysqli->close();
 	}
 	
+	//loogimine sisse
+		function login($email,$password) {
+		
+		$notice = "";
+		$mysqli = new mysqli($GLOBALS["serverHost"],$GLOBALS["serverUsername"],$GLOBALS["serverPassword"],$GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("
+		SELECT id, email, password
+		FROM pr_user
+		WHERE email = ?
+		");
+		
+		echo $mysqli->error;
+		
+		$stmt->bind_param("s", $email);
+		$stmt->bind_result($id, $emailFromDb, $passwordFromDb);
+		$stmt->execute();
+		
+		if($stmt->fetch()) {
+			$hash = hash("sha512", $password);
+		
+		if ($hash == $passwordFromDb) {
+			echo "Kasutaja $id logis sisse";
+			$_SESSION["userId"] = $id;
+			$_SESSION["userEmail"] = $emailFromDb;
+			header("Location: homepage.php");
+		} else {
+			$notice = "Vale parool";
+			}	
+		} else {
+			$notice = "Kasutajat e-posti aadressiga ".$email." ei leitud.";
+		}
+		
+		return $notice;
+	}
+	
 	//sisestuse kontrollimine
 	function test_input($data){
 		$data = trim($data);//eemaldab lõpust tühiku, tab vms

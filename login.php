@@ -16,10 +16,10 @@
 	
 	//Muutujad logiminie
 	$loginEmail = $loginPassword = "" ;	
-	$loginEmailError = $loginPasswordError = "";
+	$loginEmailError = $loginPasswordError = $notice = "";
 
 	//registreerimine
-	//Epost
+	//E-post
 	if (isset ($_POST["signupEmail"])) {
 			if (empty($_POST["signupEmail"])) {
 			$signupEmailError = "NB! Väli on kohustuslik!";
@@ -64,9 +64,34 @@
 	signUp($signupEmail, $signupPassword, $signupNickName, $_POST["singupgender"], $_POST["$signupartgenre"]);
 	}
 	
-	//salvestamine
+	//Sisselogimine
+	//E-post logimine
+	if (isset ($_POST["loginEmail"])) {
+		if (empty ($_POST["loginEmail"])) {
+		$loginEmailError = "See väli on kohustuslik!";
+		} else {
+		$loginEmail = $_POST ["loginEmail"];
+		}
+	}
+	//parooli logimine
+	if (isset ($_POST["loginPassword"])) {
+		if (empty ($_POST["loginPassword"])) {
+		$loginPasswordError = "See väli on kohustuslik!";
+		} else {
+		$loginPassword = $_POST ["loginPassword"];
+		}
+	}
 	
-	
+	//logimise lqpp ja salvestamine
+	if (isset ($_POST["loginEmail"]) &&
+		isset ($_POST["loginPassword"])  &&
+		!empty ($_POST["loginEmail"]) &&
+		!empty ($_POST["loginPassword"])
+		)
+		
+	{
+	$notice = login($_POST["loginEmail"], $_POST["loginPassword"]); //notice näitab kas parool või email on vale
+	}
 	
 ?>
 <!DOCTYPE html>
@@ -76,27 +101,53 @@
 	<title>Sisselogimine või uue kasutaja loomine</title>
 </head>
 <body>
+
+	<!--LOGIMINE-->
+	<h1>Logi sisse</h1>
+		
+		<form method="POST">
+		
+			<label>Sisselogimine</label>
+			<?=$notice;?>
+			<!--e-posti logimine-->
+			<input name="loginEmail" type="loginEmail" class="text" placeholder="E-Post" value=<?=$loginEmail;?>>
+			<br><?php echo $loginEmailError;?></br>
+			
+			<!--parooli logimine-->
+			<label>Parool</label>
+			<input name="loginPassword" type="password" class="text" placeholder="Parool">
+			<br><?php echo $loginPasswordError;?>
+			
+			<!--loogimise nupp-->
+			<input type="submit" value="Logi sisse">
+		
+		</form>
 	
+	<!--KASUTAJA REGISTREERIMINE-->
 	<h1>Loo kasutaja</h1>
 	
-	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-		<label>E-post</label>
-		<input name="signupEmail"  placeholder="e-post" type="email" value=<?=$signupEmail;?>>
-		<span><?php echo $signupEmailError; ?></span>
-		<br>
+		<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 		
-		<label>Password</label>
-		<input name="signupPassword" placeholder="Salasõna" type="password">
-		<span><?php echo $signupPasswordError; ?></span>
-		<br>
+			<!--e-posti registreerimine-->
+			<label>E-post</label>
+			<input name="signupEmail"  placeholder="e-post" type="email" value=<?=$signupEmail;?>>
+			<span><?php echo $signupEmailError; ?></span>
+			<br>
+			
+			<!--parooli registreerimine-->
+			<label>Password</label>
+			<input name="signupPassword" placeholder="Salasõna" type="password">
+			<span><?php echo $signupPasswordError; ?></span>
+			<br>
+			
+			<!--kasutaja nimi registreerimine-->
+			<label>Kasutajanimi</label>
+			<input name="signupNickName" type="signupNickName"  placeholder="Kasutajanimi" class="text" value=<?=$signupNickName;?>>
+			<span><?php echo $signupNickNameError; ?></span>
+			<br>
 		
-		<label>Kasutajanimi</label>
-		<input name="signupNickName" type="signupNickName"  placeholder="Kasutajanimi" class="text" value=<?=$signupNickName;?>>
-		<span><?php echo $signupNickNameError; ?></span>
-		<br>
-		
-		
-		<br><label for="singupgender">Sugu</label></br>
+			<!--sugu registreerimine-->
+			<label for="singupgender">Sugu</label>
 			<select name = "singupgender"  id="singupgender" required>
 			<option value="">Avamiseks vajuta</option>
 			<option value="Male">Mees</option>
@@ -104,7 +155,8 @@
 			<option value="Other">Muu</option>
 			</select>
 		
-		<br><label for="signupartgenre">Zanr</label></br>
+			<!--Zanri registreerimine-->
+			<label for="signupartgenre">Zanr</label>
 			<select name = "signupartgenre"  id="signupartgenre" required>
 			<option value="">Avamiseks vajuta</option>
 			<option value="Male">Realism</option>
@@ -112,11 +164,10 @@
 			<option value="Other">Kubizm</option>
 			</select>
 		
-		
-
-		<br><input  type="submit" value="Loo kasutaja"></br>
+			<!--registreerimise nupp-->
+			<br><input  type="submit" value="Loo kasutaja"></br>
+	
 	</form>
 
-	
 </body>
 </html>
