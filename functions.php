@@ -38,7 +38,7 @@
 	//uue kasutaja andmebaasi lisamine
 	function signUp($signupEmail, $signupPassword, $signupNickName, $signupFirstName, $signupFamilyName){
 		//loome andmebaasiühenduse
-		
+		$notice="";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 		//valmistame ette käsu andmebaasiserverile
 		$stmt = $mysqli->prepare("INSERT INTO pr_user (email, password, nickname, firstname, lastname) VALUES (?, ?, ?, ?, ?)");
