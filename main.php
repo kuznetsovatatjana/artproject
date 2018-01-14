@@ -9,6 +9,7 @@
 		exit();
 	}
 	
+	//Valjumine veebist
 	if(isset($_GET["logout"])){
 		session_destroy();
 		header("Location: login.php");
@@ -43,9 +44,9 @@
   	}
   }
   
-  //laadib kqik pildid
-  
-  $arts = getAllArt();
+  //laadib kqik pildid tabel
+  $people = getAllArt();
+
 	
 ?>
 
@@ -63,24 +64,27 @@
 	$html = "<table>";
 		
 		$html .= "<tr>";
+			$html .= "<th>id</th>";
 			$html .= "<th>art_name</th>";
 			$html .= "<th>image</th>";
 			$html .= "<th>text</th>";
 			$html .= "<th>email</th>";
 			$html .= "<th>timestamp</th>";
+			$html .= "<th>test</th>";
 		$html .= "</tr>";
 		
 		// iga liikme kohta massiivis
-		foreach ($arts as $p) {
+		foreach ($people as $p) {
 		
 		$html .= "<tr>";
+			$html .= "<td>".$p->id."</td>";
 			$html .= "<td>".$p->art_name."</td>";
-			$html .= "<td><img width='50%' height='50%' src='pictures/".$p->image."'/></td>";
+			$html .= "<td><img width='20%' height='20%' src='pictures/".$p->image."'/></td>";
 			$html .= "<td>".$p->text."</td>";
 			$html .= "<td>".$p->email."</td>";
 			$html .= "<td>".$p->timestamp."</td>";
+			$html .= "<td><a href='comment.php?id=".$p->id."'>Vasta</a></td>";
 		$html .= "</tr>";
-		
 		}
 	
 	$html .= "</table>";

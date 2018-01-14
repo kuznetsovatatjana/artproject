@@ -80,16 +80,16 @@
 		}		
 	}
 		
-	
+	//Naitame kqik pildid tabelise
 	function getAllArt(){
-		
+
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("
-		SELECT art_name, image, text, email, timestamp
+		SELECT id,art_name, image, text, email, timestamp
 		FROM pr_art_upload
 		");
-		$stmt->bind_result($art_name, $image, $text, $email, $timestamp);
+		$stmt->bind_result($id,$art_name, $image, $text, $email, $timestamp);
 		$stmt->execute();
 		
 		$results = array();
@@ -97,6 +97,7 @@
 		while($stmt->fetch()) {
 			
 			$arts = new StdClass();
+			$arts->id = $id;
 			$arts->art_name = $art_name;
 			$arts->image = $image;
 			$arts->text = $text;
@@ -108,12 +109,40 @@
 		}
 		return $results;	
 	}
-	
+
 	//sisestuse kontrollimine
 	function test_input($data){
 		$data = trim($data);//eemaldab lõpust tühiku, tab vms
 		$data = stripslashes($data);//eemaldab "\"
 		$data = htmlspecialchars($data);//eemaldab keelatud märgid
 		return $data;
+	}
+	
+	//Yhe postituse näitamine
+	function getsingleId($show_id){
+			
+	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+			
+	$stmt = $mysqli->prepare("
+	SELECT art_name, image, text,email
+	FROM pr_art_upload 
+	WHERE id = ?"); //võttab see sama ID mis klqpsutakse
+			
+	$stmt->bind_param("i", $show_id);
+	$stmt->bind_result($art_name, $image, $text, $email);
+	$stmt->execute();
+	$singleId = new Stdclass();
+			
+			if($stmt->fetch()){
+				$singleId->art_name = $art_name;
+				$singleId->image = $image;
+				$singleId->text = $text;
+				$singleId->email = $email;
+			}else{
+				header("Location: comment.php"); //kuhu saadab
+				exit();
+			}
+			$stmt->close();
+			return $singleId;
 	}
 ?>
