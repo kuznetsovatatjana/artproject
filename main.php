@@ -87,7 +87,7 @@
 		
 		$html .= "<tr>";
 			$html .= "<td>".$p->art_name."</td>";
-			$html .= "<td><img width='50%' height='50%' src='pictures/".$p->image."'/></td>";
+			$html .= "<td><img width='50%' height='' src='pictures/".$p->image."'/></td>";
 			$html .= "<td>".$p->timestamp."</td>";
 			$html .= "<td><a href='comment.php?id=".$p->id."'>Vasta</a></td>";
 		$html .= "</tr>";

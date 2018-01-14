@@ -89,7 +89,7 @@
 		
 		$html .= "<tr>";
 			$html .= "<td>".$p->art_name."</td>";
-			$html .= "<td><img width='50%' height='50%' src='pictures/".$p->image."'/></td>";
+			$html .= "<td><img width='50%' height='' src='pictures/".$p->image."'/></td>";
 			$html .= "<td>".$p->text."</td>";
 			$html .= "<td>".$p->email."</td>";
 			$html .= "<td>".$p->timestamp."</td>";

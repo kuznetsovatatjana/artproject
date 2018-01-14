@@ -102,7 +102,7 @@
 $html = "<table>";
 	$html .= "<tr>";
 		$html .= "<td>".$p->art_name."</td>";
-		$html .= "<td><img width='20%' height='20%' src='pictures/".$p->image."'/></td>";
+		$html .= "<td><img width='60%' height='' src='pictures/".$p->image."'/></td>";
 		$html .= "<td>".$p->text."</a></td>";
 		$html .= "<td>".$p->email."</a></td>";	
 	$html .= "</tr>";
