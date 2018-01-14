@@ -80,7 +80,7 @@
 		}		
 	}
 		
-	//Naitame kqik pildid tabelise
+	//Naitame viimased 2 pilte
 	function getAllArt(){
 
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
@@ -144,5 +144,35 @@
 			}
 			$stmt->close();
 			return $singleId;
+	}
+	
+	//kqik postitused
+	function getAllUserArt(){
+
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("
+		SELECT id, art_name, image,text,email, timestamp
+		FROM pr_art_upload
+		");
+		$stmt->bind_result($id,$art_name, $image, $text,$email, $timestamp);
+		$stmt->execute();
+		
+		$results = array();
+		
+		while($stmt->fetch()) {
+			
+			$arts = new StdClass();
+			$arts->id = $id;
+			$arts->art_name = $art_name;
+			$arts->image = $image;
+			$arts->text = $text;
+			$arts->email = $email;
+			$arts->timestamp = $timestamp;
+			
+			array_push($results, $arts);
+			
+		}
+		return $results;	
 	}
 ?>

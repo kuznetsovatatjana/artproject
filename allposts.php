@@ -45,7 +45,7 @@
   }
   
   //laadib kqik pildid tabel
-  $people = getAllArt();
+  $people = getAllUserArt();
 
 	
 ?>
@@ -70,14 +70,16 @@
 
 	<div class="content">
 	
-	<h1>Viimased postitused:</h1>
+	<h1> Koik postitused:</h1>
 
 <?php
 	$html = "<table>";
 		
 		$html .= "<tr>";
-			$html .= "<th>Nimi</th>";
+			$html .= "<th>Pilti nimi</th>";
 			$html .= "<th></th>";
+			$html .= "<th>Kirjeldus</th>";
+			$html .= "<th>Kes postitas</th>";
 			$html .= "<th>Kuupaev</th>";
 			$html .= "<th></th>";
 		$html .= "</tr>";
@@ -88,6 +90,8 @@
 		$html .= "<tr>";
 			$html .= "<td>".$p->art_name."</td>";
 			$html .= "<td><img width='50%' height='50%' src='pictures/".$p->image."'/></td>";
+			$html .= "<td>".$p->text."</td>";
+			$html .= "<td>".$p->email."</td>";
 			$html .= "<td>".$p->timestamp."</td>";
 			$html .= "<td><a href='comment.php?id=".$p->id."'>Vasta</a></td>";
 		$html .= "</tr>";
