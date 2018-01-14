@@ -84,6 +84,16 @@
 	</title>
 </head>
 
+<ul>
+  <li><a class="active" href="main.php">Home</a></li>
+  <li><a href="#news">Postitused</a></li>
+  <li><a href="#contact">Minu postitused</a></li>
+  <li style="float:right"><a href="?logout=1">Logi valja</a></li>
+</ul>
+
+<body>
+
+<div class="content">
 <p><a href="?logout=1">Logi valja!</a></p>
 <p><a href="main.php">tagasi</a></p>
 
@@ -120,5 +130,6 @@ $html1 .= "</table>";
 echo $html1
 ?>
 	
-
+</div>
+</body>
 </html>

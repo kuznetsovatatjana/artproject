@@ -86,10 +86,12 @@
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("
-		SELECT id,art_name, image, text, email, timestamp
+		SELECT id,art_name, image, timestamp
 		FROM pr_art_upload
+		ORDER BY id
+		DESC LIMIT 2
 		");
-		$stmt->bind_result($id,$art_name, $image, $text, $email, $timestamp);
+		$stmt->bind_result($id,$art_name, $image, $timestamp);
 		$stmt->execute();
 		
 		$results = array();
@@ -100,8 +102,6 @@
 			$arts->id = $id;
 			$arts->art_name = $art_name;
 			$arts->image = $image;
-			$arts->text = $text;
-			$arts->email = $email;
 			$arts->timestamp = $timestamp;
 			
 			array_push($results, $arts);

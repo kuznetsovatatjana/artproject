@@ -57,31 +57,37 @@
 	<title>
 		Art Gallery
 	</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-	<?php
+<ul>
+  <li><a class="active" href="main.php">Home</a></li>
+  <li><a href="#news">Postitused</a></li>
+  <li><a href="#contact">Minu postitused</a></li>
+  <li style="float:right"><a href="?logout=1">Logi valja</a></li>
+</ul>
+
+	<div class="content">
+	
+	<h1>Viimased postitused:</h1>
+
+<?php
 	$html = "<table>";
 		
 		$html .= "<tr>";
-			$html .= "<th>id</th>";
-			$html .= "<th>art_name</th>";
-			$html .= "<th>image</th>";
-			$html .= "<th>text</th>";
-			$html .= "<th>email</th>";
-			$html .= "<th>timestamp</th>";
-			$html .= "<th>test</th>";
+			$html .= "<th>Nimi</th>";
+			$html .= "<th></th>";
+			$html .= "<th>Kuupaev</th>";
+			$html .= "<th></th>";
 		$html .= "</tr>";
 		
 		// iga liikme kohta massiivis
 		foreach ($people as $p) {
 		
 		$html .= "<tr>";
-			$html .= "<td>".$p->id."</td>";
 			$html .= "<td>".$p->art_name."</td>";
-			$html .= "<td><img width='20%' height='20%' src='pictures/".$p->image."'/></td>";
-			$html .= "<td>".$p->text."</td>";
-			$html .= "<td>".$p->email."</td>";
+			$html .= "<td><img width='50%' height='50%' src='pictures/".$p->image."'/></td>";
 			$html .= "<td>".$p->timestamp."</td>";
 			$html .= "<td><a href='comment.php?id=".$p->id."'>Vasta</a></td>";
 		$html .= "</tr>";
@@ -89,30 +95,10 @@
 	
 	$html .= "</table>";
 	echo $html;
-	?>
+?>
 
-
-	<div id="content">
-	</div>
-
-<p><a href="?logout=1">Logi valja!</a></p>
-
-<div id="content">
-	<form method="post" action="main.php" enctype="multipart/form-data">
-		Select image to upload:
-		
-		<input name="art_name" class="text" type="art_name">
-		
-		<input type="file" name="image">
-
-		<textarea name="text" cols="40" rows="4"></textarea>
-
-		<input type="submit" value="upload" name="upload">
-	
-	</form>
-</div>	
-
-
+<a href="upload.php"><button class="button button2">Laadi oma pilti</button></a>
+</div>
 
 </body>
 </html>
