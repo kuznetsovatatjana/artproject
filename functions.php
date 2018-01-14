@@ -31,7 +31,7 @@
 		$mysqli = new mysqli($GLOBALS["serverHost"],$GLOBALS["serverUsername"],$GLOBALS["serverPassword"],$GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("
-		SELECT id, email, password
+		SELECT user_id, email, password
 		FROM pr_user
 		WHERE email = ?
 		");
