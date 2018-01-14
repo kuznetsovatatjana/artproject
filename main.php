@@ -34,13 +34,15 @@
 
   	// image file directory
   	$target = "pictures/".basename($image);
+	$email = $_SESSION["userEmail"];
+	
+  	$sql = "INSERT INTO pr_art_upload (image,text,email) VALUES ('$image', '$text','$email')";
 
-  	$sql = "INSERT INTO pr_art_upload (image,text) VALUES ('$image', '$text')";
   	// execute query
   	mysqli_query($db, $sql);
 
   	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-  		$msg = "Image uploaded successfully";
+  		echo "Image uploaded successfully";
   	}else{
   		$msg = "Failed to upload image";
   	}
