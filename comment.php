@@ -82,12 +82,13 @@
 	<title>
 		Art Gallery
 	</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <ul>
   <li><a class="active" href="main.php">Home</a></li>
-  <li><a href="#news">Postitused</a></li>
-  <li><a href="#contact">Minu postitused</a></li>
+  <li><a href="myposts.php">Minu postitused</a></li>
+  <li><a href="allposts.php">Postitused</a></li>
   <li style="float:right"><a href="?logout=1">Logi valja</a></li>
 </ul>
 
@@ -112,7 +113,7 @@ echo $html
 
 	<form method="POST">
 
-	<input name="comment" class="text" placeholder="Jata kommentaar">	
+	<input name="comment" class="text" placeholder="Jata kommentaar" required>	
 	<br><input type="submit" value="Saada"></br>
 
 	</form>

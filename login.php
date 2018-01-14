@@ -98,15 +98,18 @@
 <head>
 	<meta charset="utf-8">
 	<title>Sisselogimine või uue kasutaja loomine</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
+<div class="content">
 	<!--LOGIMINE-->
 	<h1>Logi sisse</h1>
 		
 		<form method="POST">
 		
-			<label>Sisselogimine</label>
+			<label>E-post</label>
+			<br>
 			<?=$notice;?>
 			<!--e-posti logimine-->
 			<input name="loginEmail" type="loginEmail" class="text" placeholder="E-Post" value=<?=$loginEmail;?>>
@@ -114,6 +117,7 @@
 			
 			<!--parooli logimine-->
 			<label>Parool</label>
+			<br>
 			<input name="loginPassword" type="password" class="text" placeholder="Parool">
 			<br><?php echo $loginPasswordError;?>
 			
@@ -129,24 +133,28 @@
 			<!--e-posti registreerimine-->
 			<?php echo $notice2;?> <br>
 			<label>E-post</label>
+			<br>
 			<input name="signupEmail"  placeholder="e-post" type="email" value=<?=$signupEmail;?>>
 			<span><?php echo $signupEmailError; ?></span>
 			<br>
 			
 			<!--parooli registreerimine-->
 			<label>Password</label>
+			<br>
 			<input name="signupPassword" placeholder="Salasõna" type="password">
 			<span><?php echo $signupPasswordError; ?></span>
 			<br>
 			
 			<!--kasutaja nimi registreerimine-->
 			<label>Kasutajanimi</label>
+			<br>
 			<input name="signupNickName" type="signupNickName"  placeholder="Kasutajanimi" class="text" value=<?=$signupNickName;?>>
 			<span><?php echo $signupNickNameError; ?></span>
 			<br>
 		
 			<!--sugu registreerimine-->
 			<label for="singupgender">Sugu</label>
+			<br>
 			<select name = "singupgender"  id="singupgender" required>
 			<option value="">Avamiseks vajuta</option>
 			<option value="Male">Mees</option>
@@ -158,6 +166,6 @@
 			<br><input  type="submit" value="Loo kasutaja"></br>
 	
 	</form>
-
+</div>
 </body>
 </html>

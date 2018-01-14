@@ -43,11 +43,9 @@
   		$msg = "Failed to upload image";
   	}
   }
-  
-  //laadib kqik pildid tabel
-  $people = getAllUserArt();
 
 	
+	$people = kasutajainfo();
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +53,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>
-		Art Gallery
+		Minu postitused
 	</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -68,37 +66,31 @@
   <li style="float:right"><a href="?logout=1">Logi valja</a></li>
 </ul>
 
-	<div class="content">
-	
-	<h1> Koik postitused:</h1>
+<div class="content">
 
-<?php
-	$html = "<table>";
-		
-		$html .= "<tr>";
-			$html .= "<th>Pilti nimi</th>";
-			$html .= "<th></th>";
-			$html .= "<th>Kirjeldus</th>";
-			$html .= "<th>Kes postitas</th>";
-			$html .= "<th>Kuupaev</th>";
-			$html .= "<th></th>";
-		$html .= "</tr>";
-		
-		// iga liikme kohta massiivis
-		foreach ($people as $p) {
-		
-		$html .= "<tr>";
-			$html .= "<td>".$p->art_name."</td>";
-			$html .= "<td><img width='50%' height='50%' src='pictures/".$p->image."'/></td>";
-			$html .= "<td>".$p->text."</td>";
-			$html .= "<td>".$p->email."</td>";
-			$html .= "<td>".$p->timestamp."</td>";
-			$html .= "<td><a href='comment.php?id=".$p->id."'>Vasta</a></td>";
-		$html .= "</tr>";
-		}
-	
-	$html .= "</table>";
-	echo $html;
+<h1>Sinu postitused:</h1>
+
+<?php 
+		$html = "<table>";
+			
+			$html .= "<tr>";
+				$html .= "<th>Piltide nimed</th>";
+				$html .= "<th>Piltid</th>";
+				$html .= "<th>Kirjeldus</th>";
+				$html .= "<th>Email</th>";
+			$html .= "</tr>";
+			
+			foreach ($people as $p) {
+			$html .= "<tr>";
+				$html .= "<td>".$p->art_name."</td>";
+				$html .= "<td><img width='50%' height='50%' src='pictures/".$p->image."'/></td>";
+				$html .= "<td>".$p->text."</td>";
+				$html .= "<td>".$p->email."</td>";
+			$html .= "</tr>";
+			}
+			$html .= "</table>";
+			
+		echo $html
 ?>
 
 <a href="upload.php"><button class="button button2">Laadi oma pilti</button></a>

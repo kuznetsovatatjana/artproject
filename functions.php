@@ -175,4 +175,34 @@
 		}
 		return $results;	
 	}
+	 
+	 //NAITAB UHE KASUTAJA INFOT
+	function kasutajainfo(){
+		
+		$mysqli = new mysqli($GLOBALS["serverHost"], 
+		$GLOBALS["serverUsername"], 
+		$GLOBALS["serverPassword"], 
+		$GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("
+		SELECT art_name, image,text,email
+		FROM pr_art_upload
+		WHERE email = ?
+		");
+		
+		$stmt->bind_param("s", $_SESSION["userEmail"]);
+		$stmt->bind_result( $art_name, $image,$text,$email);
+		$stmt->execute();
+		$results = array();
+		
+		while ($stmt->fetch()) {
+			$kasutajainf = new StdClass();
+			$kasutajainf->art_name = $art_name;
+			$kasutajainf->image = $image;
+			$kasutajainf->text = $text;
+			$kasutajainf->email = $email;
+			array_push($results, $kasutajainf);	
+		}
+		return $results;
+	}
 ?>
