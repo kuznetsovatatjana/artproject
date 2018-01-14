@@ -66,6 +66,19 @@
 		return $notice;
 	}
 	
+	//Oma pilte laadimine
+	function saveEvent($art_url, $art_name) {
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("INSERT INTO pr_art_upload (art_url, art_name, email) VALUE (?, ?, ?)");
+		echo $mysqli->error;
+		
+		$stmt->bind_param("sss", $art_url, $art_name, $_SESSION["userEmail"]);
+		if ( $stmt->execute() ) {
+		} else {
+			echo "ERROR ".$stmt->error;
+		}	
+	}
 	
 	//sisestuse kontrollimine
 	function test_input($data){
