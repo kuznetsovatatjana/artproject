@@ -7,19 +7,25 @@
 	
 	//uue kasutaja registreerimine
 	//uue kasutaja andmebaasi lisamine
-	function signUp($signupEmail, $signupPassword, $signupNickName, $singupgender, $signupartgenre){
+	function signUp($signupEmail, $signupPassword, $signupNickName, $singupgender){
+		
+		$notice2 = "";
 		//loome andmebaasiühenduse
+		
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 		//valmistame ette käsu andmebaasiserverile
-		$stmt = $mysqli->prepare("INSERT INTO pr_user (email, password, nickname, gender, artgenre) VALUES (?, ?, ?, ?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO pr_user (email, password, nickname, gender) VALUES (?, ?, ?, ?)");
 		echo $mysqli->error;
-		$stmt->bind_param("sssss", $signupEmail, $signupPassword, $signupNickName, $singupgender, $signupartgenre);
+		$stmt->bind_param("ssss", $signupEmail, $signupPassword, $signupNickName, $singupgender);
+		
 		//$stmt->execute();
 		if ($stmt->execute()){
 			echo "\n Õnnestus!";
 		} else {
-			echo "\n Tekkis viga : " .$stmt->error;
+			$notice2 = "Selline e-post on juba olemas !";
 		}
+		return $notice2;
+		
 		$stmt->close();
 		$mysqli->close();
 	}
@@ -59,6 +65,7 @@
 		
 		return $notice;
 	}
+	
 	
 	//sisestuse kontrollimine
 	function test_input($data){

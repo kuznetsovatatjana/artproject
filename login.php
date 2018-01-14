@@ -11,12 +11,12 @@
 	}
 	
 	//Muutujad registreerimne
-	$signupEmail = $signupPassword = $signupNickName = $singupgender = $signupartgenre = "";
+	$signupEmail = $signupPassword = $signupNickName = $singupgender = "";
 	$signupEmailError = $signupPasswordError = $signupNickNameError = "";
 	
 	//Muutujad logiminie
 	$loginEmail = $loginPassword = "" ;	
-	$loginEmailError = $loginPasswordError = $notice = "";
+	$loginEmailError = $loginPasswordError = $notice = $notice2 = "";
 
 	//registreerimine
 	//E-post
@@ -61,7 +61,7 @@
 	
 	{
 	$signupPassword = hash("sha512", $_POST["signupPassword"]);
-	signUp($signupEmail, $signupPassword, $signupNickName, $_POST["singupgender"], $_POST["$signupartgenre"]);
+	$notice2 = signUp($signupEmail, $signupPassword, $signupNickName, $_POST["singupgender"]);
 	}
 	
 	//Sisselogimine
@@ -92,7 +92,6 @@
 	{
 	$notice = login($_POST["loginEmail"], $_POST["loginPassword"]); //notice näitab kas parool või email on vale
 	}
-	
 ?>
 <!DOCTYPE html>
 <html lang="et">
@@ -125,10 +124,10 @@
 	
 	<!--KASUTAJA REGISTREERIMINE-->
 	<h1>Loo kasutaja</h1>
-	
+
 		<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-		
 			<!--e-posti registreerimine-->
+			<?php echo $notice2;?> <br>
 			<label>E-post</label>
 			<input name="signupEmail"  placeholder="e-post" type="email" value=<?=$signupEmail;?>>
 			<span><?php echo $signupEmailError; ?></span>
@@ -153,15 +152,6 @@
 			<option value="Male">Mees</option>
 			<option value="Female">Naine</option>
 			<option value="Other">Muu</option>
-			</select>
-		
-			<!--Zanri registreerimine-->
-			<label for="signupartgenre">Zanr</label>
-			<select name = "signupartgenre"  id="signupartgenre" required>
-			<option value="">Avamiseks vajuta</option>
-			<option value="Male">Realism</option>
-			<option value="Female">Impressionizm</option>
-			<option value="Other">Kubizm</option>
 			</select>
 		
 			<!--registreerimise nupp-->
