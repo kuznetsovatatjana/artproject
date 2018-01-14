@@ -67,7 +67,7 @@
 	}
 	
 	//Oma pilte laadimine
-	function saveEvent($art_url, $art_name) {
+	function saveArt($art_url, $art_name) {
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("INSERT INTO pr_art_upload (art_url, art_name, email) VALUE (?, ?, ?)");
@@ -77,7 +77,36 @@
 		if ( $stmt->execute() ) {
 		} else {
 			echo "ERROR ".$stmt->error;
-		}	
+		}		
+	}
+		
+	
+	function getAllArt(){
+		
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("
+		SELECT art_name, image, text, email, timestamp
+		FROM pr_art_upload
+		");
+		$stmt->bind_result($art_name, $image, $text, $email, $timestamp);
+		$stmt->execute();
+		
+		$results = array();
+		
+		while($stmt->fetch()) {
+			
+			$arts = new StdClass();
+			$arts->art_name = $art_name;
+			$arts->image = $image;
+			$arts->text = $text;
+			$arts->email = $email;
+			$arts->timestamp = $timestamp;
+			
+			array_push($results, $arts);
+			
+		}
+		return $results;	
 	}
 	
 	//sisestuse kontrollimine

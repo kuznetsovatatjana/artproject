@@ -15,38 +15,37 @@
 		exit();
 	}
 	
-	//if upload button is pressed
-	
-	
-  // Create database connection
-
-  // Initialize message variable
+  //PILTI LAADIMINE
+  
   $msg = "";
   $db = "if17_tanjak";
   $db = mysqli_connect("$serverHost", "$serverUsername", "$serverPassword", "$db");
-
-  // If upload button is clicked ...
+  
+  //Kui vajutatakse nuppu
   if (isset($_POST['upload'])) {
-  	// Get image name
+  	// Piltide nimi
   	$image = $_FILES['image']['name'];
-  	// Get text
+  	//tekst
   	$text = mysqli_real_escape_string($db, $_POST['text']);
-
+	$art_name = mysqli_real_escape_string($db, $_POST['art_name']);
+	$email = $_SESSION["userEmail"]; // vottab just sama sessionist kasutajat
   	// image file directory
   	$target = "pictures/".basename($image);
-	$email = $_SESSION["userEmail"];
 	
-  	$sql = "INSERT INTO pr_art_upload (image,text,email) VALUES ('$image', '$text','$email')";
-
-  	// execute query
+  	$sql = "INSERT INTO pr_art_upload (art_name,image,text,email) VALUES ('$art_name','$image', '$text','$email')";
   	mysqli_query($db, $sql);
 
+	//Kas pilt laaditud ja kas kqik on korras
   	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-  		echo "Image uploaded successfully";
+  		$msg = "Image uploaded successfully";
   	}else{
   		$msg = "Failed to upload image";
   	}
   }
+  
+  //laadib kqik pildid
+  
+  $arts = getAllArt();
 	
 ?>
 
@@ -59,12 +58,46 @@
 	</title>
 </head>
 <body>
+
+	<?php
+	$html = "<table>";
+		
+		$html .= "<tr>";
+			$html .= "<th>art_name</th>";
+			$html .= "<th>image</th>";
+			$html .= "<th>text</th>";
+			$html .= "<th>email</th>";
+			$html .= "<th>timestamp</th>";
+		$html .= "</tr>";
+		
+		// iga liikme kohta massiivis
+		foreach ($arts as $p) {
+		
+		$html .= "<tr>";
+			$html .= "<td>".$p->art_name."</td>";
+			$html .= "<td><img width='50%' height='50%' src='pictures/".$p->image."'/></td>";
+			$html .= "<td>".$p->text."</td>";
+			$html .= "<td>".$p->email."</td>";
+			$html .= "<td>".$p->timestamp."</td>";
+		$html .= "</tr>";
+		
+		}
+	
+	$html .= "</table>";
+	echo $html;
+	?>
+
+
+	<div id="content">
+	</div>
+
 <p><a href="?logout=1">Logi valja!</a></p>
 
 <div id="content">
 	<form method="post" action="main.php" enctype="multipart/form-data">
 		Select image to upload:
-		<input type="hidden" name="size" value="10000">
+		
+		<input name="art_name" class="text" type="art_name">
 		
 		<input type="file" name="image">
 
