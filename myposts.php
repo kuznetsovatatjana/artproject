@@ -1,5 +1,5 @@
 <?php
-	//et pääseks ligi sessioonile ja funktsioonidele
+	//et pÃ¤Ã¤seks ligi sessioonile ja funktsioonidele
 	require("functions.php");
 	require("vpconfig.php");
 	
@@ -45,7 +45,7 @@
   }
 
 	
-	$people = kasutajainfo();
+	$people = oneUserInfo();
 ?>
 
 <!DOCTYPE html>
