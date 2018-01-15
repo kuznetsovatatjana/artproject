@@ -177,7 +177,7 @@
 	}
 	 
 	 //NAITAB UHE KASUTAJA INFOT
-	function kasutajainfo(){
+	function oneUserInfo(){
 		
 		$mysqli = new mysqli($GLOBALS["serverHost"], 
 		$GLOBALS["serverUsername"], 
@@ -196,12 +196,12 @@
 		$results = array();
 		
 		while ($stmt->fetch()) {
-			$kasutajainf = new StdClass();
-			$kasutajainf->art_name = $art_name;
-			$kasutajainf->image = $image;
-			$kasutajainf->text = $text;
-			$kasutajainf->email = $email;
-			array_push($results, $kasutajainf);	
+			$userinf = new StdClass();
+			$userinf->art_name = $art_name;
+			$userinf->image = $image;
+			$userinf->text = $text;
+			$userinf->email = $email;
+			array_push($results, $userinf);	
 		}
 		return $results;
 	}
