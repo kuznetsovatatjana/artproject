@@ -20,3 +20,8 @@ Funktsionaalsus:
 erinevate inimeste postitused.
 
 Ei jõudnud teha postituse ja kommentaaride kustutamist ja hindamist. Oli raske teha kommentaarid.
+
+Taabelid
+![screenshot of sample](http://www.tlu.ee/~tanjak/work/Capture1.JPG)
+![screenshot of sample](http://www.tlu.ee/~tanjak/work/Capture2.JPG)
+![screenshot of sample](http://www.tlu.ee/~tanjak/work/Capture3.JPG)
