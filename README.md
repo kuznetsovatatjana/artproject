@@ -14,3 +14,9 @@ Funktsionaalsus:
 6. Viimase piltide vaatamine
 7. Piltide kommenteerimine
 8. Välja logimine
+
+Õppisin kuidas info veebilehel välja panema tabeli vormis. Õppisin juurde info andmebaasisi välja paneku erinevates vormides.
+(Näiteks ühe inimese postitised ja viimased postitused). Õppisin kuidas teha, et erinevad inimesed saaksid kommenteerida 
+erinevate inimeste postitused.
+
+Ei jõudnud teha postituse ja kommentaaride kustutamist ja hindamist. Oli raske teha kommentaarid.
