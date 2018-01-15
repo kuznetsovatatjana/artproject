@@ -1,6 +1,6 @@
 # Artproject
 Veebiprogrammeerimine
-
+![screenshot of sample](http://www.tlu.ee/~tanjak/work/veebi.JPG)
 Autor: Tatjana Kuznetsova
 
 See on kunstigalerii, kus on võimalik jagada oma pildid, ja vaadata ja kommenteerida teiste inimeste pildid.
